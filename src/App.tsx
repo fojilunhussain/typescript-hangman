@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Hangman } from './Components/Hangman'
 
-const App: React.FC = () => {
+const App = ({  }) => {
+
+  const [word, setWord] = React.useState<string>("")
+
+  const listOfRandomWords : string[] = [
+    "blush", "fallacious", "regret", "decide",
+    "humdrum", "wine", "spiteful", "wobble",
+    "punishment", "amusing", "bustling", "wandering"]
+
+  const newGame = () => {
+    setWord(listOfRandomWords[Math.floor(Math.random() * (listOfRandomWords).length)])
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <button
+        onClick = {() => {
+          newGame()
+        }}
+      >
+        New game
+      </button>
+      <Hangman wordChosen={word} />
+    </>
+    
+
   );
+
 }
 
-export default App;
+export default App

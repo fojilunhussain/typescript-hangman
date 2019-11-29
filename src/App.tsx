@@ -1,5 +1,6 @@
 import React from 'react'
 import { Hangman } from './Components/Hangman'
+import './App.css'
 
 const App = () => {
 
@@ -16,7 +17,10 @@ const App = () => {
   }
 
   return (
-    <>
+    <div id = "container">
+      <header className = "detail">
+        .
+      </header>
       <button
         onClick = {() => {
           newGame()
@@ -28,7 +32,10 @@ const App = () => {
         wordChosen={word}
         gameStarted = {isGameStarted}
       />
-    </>
+      <footer className = "detail">
+        .
+      </footer>
+    </div>
   );
 }
 

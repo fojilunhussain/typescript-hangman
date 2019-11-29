@@ -2,9 +2,10 @@ import React, { useEffect } from 'react'
 
 interface Props {
     wordChosen: string;
+    gameStarted: boolean;
   }
 
-export const Hangman: React.FC<Props> = ({wordChosen}) => {
+export const Hangman: React.FC<Props> = ({wordChosen, gameStarted}) => {
 
     const [livesRemaining, setLivesRemaining] = React.useState<number>(10);
     const [guessedLetters, setGuessedLetters] = React.useState<string[]>([]);
@@ -33,14 +34,18 @@ export const Hangman: React.FC<Props> = ({wordChosen}) => {
         } else {
             setLivesRemaining(livesRemaining - 1)
         }
-        isGameOver()
     }
 
-    console.log(wordInProgress.join(""))
-
-    const isGameOver = () => {
+    if (gameStarted) {
         if (livesRemaining === 0 || wordInProgress.join("") === wordChosen) {
-            console.log("ooo")
+            gameStarted = false
+            switch (wordInProgress.join("")) {
+                case wordChosen:
+                    return <p>You win</p>
+                    break;
+                default:
+                    return <p>You lose</p>
+            }
         }
     }
 
@@ -50,8 +55,6 @@ export const Hangman: React.FC<Props> = ({wordChosen}) => {
 
     return (
         <>
-            <div>Hangman body goes here</div>
-            <div>Word: {wordChosen}</div>
             <div>Word in progress: {wordInProgress.join(" ")}</div>
             <div>Guesses: {guessedLetters}</div>
             <div>Lives remaining: {livesRemaining}</div>
